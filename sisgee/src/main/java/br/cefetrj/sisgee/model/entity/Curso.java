@@ -106,4 +106,25 @@ public class Curso {
 	public String toString() {
 		return nomeCurso;
 	}
+        
+        
+        
+        public Curso cursoApiSIE(Curso c, String nomeC, String codCur, String nomeCampus ){
+            Curso CN = c;
+            Campus CA= c.getCampus();
+                if(!((c.getNomeCurso()).equalsIgnoreCase(nomeC))){
+                     CN.setNomeCurso(nomeC);
+                }
+                if(!((c.getCodigoCurso()).equalsIgnoreCase(codCur))){
+                    CN.setCodigoCurso(codCur);
+                }
+                CA = CA.campusApiSIE(CA, nomeCampus);
+                    
+                CN.setCampus(CA);
+                
+                
+            return CN;       
+        }
+
+
 }

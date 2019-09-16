@@ -18,6 +18,7 @@ import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.ProfessorOrientador;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
+import static br.cefetrj.sisgee.model.entity.TermoEstagio.ArrumaEstadoTermo;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
@@ -88,6 +89,7 @@ public class TermoAditivoServlet extends HttpServlet {
             }
             System.out.println("que isso :" + TermoAditivoServices.listarTermoAditivo());
             try {
+                termoEstagio = ArrumaEstadoTermo(termoEstagio);
                 if (termoEstagio != null && (aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataFimTermoEstagio().compareTo(cal.getTime()) > 0) && termoEstagio.getEstado().equals("Ativo")) {
                     //TODO implementar lógica de encaminhamento para a tela de registro
                     termosAditivos = termoEstagio.getTermosAditivos();

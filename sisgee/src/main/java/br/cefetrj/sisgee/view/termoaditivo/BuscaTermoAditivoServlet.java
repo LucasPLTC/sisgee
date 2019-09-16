@@ -19,6 +19,8 @@ import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
+import java.util.Calendar;
+import static br.cefetrj.sisgee.model.entity.TermoEstagio.ArrumaEstadoListaTermo;
 /**
  * Servlet responsável pela busca de informações de cada termo aditivo
  * @author Vinicius Paradellas
@@ -29,6 +31,8 @@ import br.cefetrj.sisgee.view.utils.ValidaUtils;
 @WebServlet("/BuscaTermoAditivoServlet")
 public class BuscaTermoAditivoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+        
+        
 
         /**
          * 
@@ -70,14 +74,18 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
 		
                 if (termoEstagios != null) {
                   //request.setAttribute("termosAditivos",TermoAditivoServices.listarTermoAditivo());
-                  if(aluno.getTermoEstagios().size() > 0){
+                  if(termoEstagios.size() > 0){
                 	 List<TermoAditivo>termoAditivos = aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getTermosAditivos();
                 	 Collections.sort(termoAditivos);
+                         
+                         
+                         
                       request.setAttribute("termosAditivos", termoAditivos);
                   }
+                  termoEstagios = ArrumaEstadoListaTermo(termoEstagios);
                 }
 		
-                request.setAttribute("listaTermoEstagio", aluno.getTermoEstagios());
+                request.setAttribute("listaTermoEstagio", termoEstagios);
                 request.setAttribute("msg",msg);
                 }
 		request.getRequestDispatcher("/form_termo_aditivo.jsp").forward(request, response);

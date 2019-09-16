@@ -20,9 +20,11 @@ import br.cefetrj.sisgee.model.dao.TermoAditivoDAO;
 import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
+import static br.cefetrj.sisgee.model.entity.TermoEstagio.ArrumaEstadoListaTermo;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Servlet responsável pelo formulário de termo de rescisão
@@ -69,6 +71,7 @@ public class FormTermoRescisaoServlet extends HttpServlet {
         String idAluno = request.getParameter("idAluno");
         TermoEstagio termoEstagio = null;
 
+        Calendar cal = Calendar.getInstance();
         Aluno aluno = null;
         boolean isValid = true;
         Date dataRescisao = null;
@@ -89,10 +92,14 @@ public class FormTermoRescisaoServlet extends HttpServlet {
                 aluno = AlunoServices.buscarAluno(new Aluno(idAlunoInt));
                 if (aluno != null) {
                     List<TermoEstagio> termosEstagio = aluno.getTermoEstagios();
+                    termosEstagio = ArrumaEstadoListaTermo(termosEstagio);
                     for (TermoEstagio termoEstagio2 : termosEstagio) {
-                        if (termoEstagio2.getDataRescisaoTermoEstagio() == null) {
+                        if (termoEstagio2.getDataRescisaoTermoEstagio() == null && (termoEstagio2.getEstado()).equals("ativo") ) {
+                            
+                            System.out.println("PEGOUUUUUU");  
                             termoEstagio = termoEstagio2;
                             break;
+                            
                         }
                     }
 
@@ -170,6 +177,7 @@ public class FormTermoRescisaoServlet extends HttpServlet {
         if (isValid) {
             try {
                 termoEstagio.setDataRescisaoTermoEstagio(dataRescisao);
+                termoEstagio.setEstado("encerrado");
                 TermoEstagioServices.encerrarTermoEstagio(termoEstagio);
                 msg = "Data de Rescisão registrada com sucesso";
                 request.setAttribute("msg", msg);

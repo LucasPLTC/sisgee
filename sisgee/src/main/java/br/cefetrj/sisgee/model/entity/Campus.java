@@ -60,6 +60,14 @@ public class Campus {
 		result = prime * result + ((idCampus == null) ? 0 : idCampus.hashCode());
 		return result;
 	}
+        
+        public Campus campusApiSIE(Campus c, String nome){
+            Campus CN = c;
+                if(!(c.getNomeCampus()).equalsIgnoreCase(nome)){
+                     CN.setNomeCampus(nome);
+                }
+            return CN;       
+        }
 
 	@Override
 	public boolean equals(Object obj) {
@@ -82,4 +90,7 @@ public class Campus {
 	public String toString() {
 		return nomeCampus;
 	}
+        
+        
+        
 }

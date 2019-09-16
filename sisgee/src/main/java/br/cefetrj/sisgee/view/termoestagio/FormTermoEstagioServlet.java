@@ -24,6 +24,7 @@ import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.ProfessorOrientador;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
+import static br.cefetrj.sisgee.model.entity.TermoEstagio.ArrumaEstadoTermo;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
@@ -759,14 +760,19 @@ public class FormTermoEstagioServlet extends HttpServlet {
 
             List<TermoEstagio> termosEstagio = aluno.getTermoEstagios();
             for (TermoEstagio t : termosEstagio) {
-                if (((aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio() == null && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataFimTermoEstagio().compareTo(cal.getTime()) > 0))
-                        || (aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio() != null && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio().compareTo(cal.getTime()) > 0)) {
+                System.out.println("OPA +1");
+                t = ArrumaEstadoTermo(t);
+                //if (((aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio() == null && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataFimTermoEstagio().compareTo(cal.getTime()) > 0))
+                 //       || (aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio() != null && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio().compareTo(cal.getTime()) > 0)) {
+                    if((t.getEstado()).equals("ativo")){
                     hasTermoAberto = true;
+                    System.out.print("Achou Termo Ativo: " + t.getEstado() +"  "+t.getIdTermoEstagio());
                     break;
-                }
+                //}
+                    }
             }
 
-            if (hasTermoAberto) {
+            if (hasTermoAberto == true) {
                 String msg2 = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.msg_aluno_has_termo_aberto");
                 request.setAttribute("msg2", msg2);
                 isValid = false;
@@ -789,7 +795,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
      * @param request
      * @return
      */
-    private static HttpServletRequest carregarListas(HttpServletRequest request) {
+    private static HttpServletRequest carregarListas(HttpServletRequest request) throws IOException {
 
         List<AgenteIntegracao> agentesIntegracao = AgenteIntegracaoServices.listarAgenteIntegracao();
         List<Empresa> empresas = EmpresaServices.listarEmpresas();

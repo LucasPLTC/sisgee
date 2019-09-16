@@ -151,7 +151,7 @@ public class TermoEstagio{
         this.nomeAgenciada = nomeAgenciada;
     }
 
-    public String getEstado() throws Exception {
+    /*public String getEstado() throws Exception {
         //final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         Date a = getDataFimTermoEstagio(), b = getDataRescisaoTermoEstagio();
@@ -165,7 +165,65 @@ public class TermoEstagio{
             }
         }
         return "Encerrado";
+    }*/
+    
+    public static List<TermoEstagio> ArrumaEstadoListaTermo(List<TermoEstagio> ListaTermo){
+            List<TermoEstagio> ListaAtu = ListaTermo;
+            Calendar cal = Calendar.getInstance();
+            
+            for(TermoEstagio ter: ListaAtu){
+                if(ter.getDataRescisaoTermoEstagio()!=null){
+                    if(ter.getDataFimTermoEstagio().before(ter.getDataRescisaoTermoEstagio())){
+                        if(ter.getDataRescisaoTermoEstagio().before(cal.getTime())){
+                            ter.setEstado("encerrado");
+                        }else{
+                            ter.setEstado("ativo");
+                        }
+                    }else{
+                        ter.setEstado("encerrado");
+                    }
+                }else if(ter.getDataFimTermoEstagio().before(cal.getTime())){
+                    ter.setEstado("encerrado");
+                }else{
+                    ter.setEstado("ativo");
+                }
+            }
+           return ListaAtu; 
+        }
+    
+    public static TermoEstagio ArrumaEstadoTermo(TermoEstagio TermoAtu){
+            TermoEstagio TermoaATT= TermoAtu;
+            Calendar cal = Calendar.getInstance();
+            
+            
+                if(TermoaATT.getDataRescisaoTermoEstagio()!=null){
+                    if(TermoaATT.getDataFimTermoEstagio().before(TermoaATT.getDataRescisaoTermoEstagio())){
+                        if(TermoaATT.getDataRescisaoTermoEstagio().before(cal.getTime())){
+                            TermoaATT.setEstado("encerrado");
+                        }else{
+                            TermoaATT.setEstado("ativo");
+                        }
+                    }else{
+                        TermoaATT.setEstado("encerrado");
+                    }
+                }else if(TermoaATT.getDataFimTermoEstagio().before(cal.getTime())){
+                    TermoaATT.setEstado("encerrado");
+                }else{
+                    TermoaATT.setEstado("ativo");
+                
+            }
+           return TermoaATT; 
+        }
+
+    public String getEstado() {
+        return estado;
     }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 
     public Integer getIdTermoEstagio() {
         return idTermoEstagio;

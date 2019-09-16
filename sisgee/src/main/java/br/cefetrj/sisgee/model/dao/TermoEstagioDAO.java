@@ -23,7 +23,7 @@ public class TermoEstagioDAO  {
 		EntityManager manager = factory.createEntityManager();
 			
 			Query query = manager
-				.createNativeQuery("select te.idtermoestagio, cur.nomecurso, te.datarescisaotermoestagio " + 
+				.createNativeQuery("select te.idtermoestagio, cur.nomecurso, te.datarescisaotermoestagio, te.estado " + 
 						"from termoestagio te " + 
 						"inner join aluno a " + 
 						"on te.aluno_idaluno = a.idaluno " + 
@@ -59,7 +59,7 @@ public class TermoEstagioDAO  {
 		EntityManager manager = factory.createEntityManager();
 			
 			Query query = manager
-				.createNativeQuery("select te.idtermoestagio, cur.nomecurso, te.datarescisaotermoestagio " + 
+				.createNativeQuery("select te.idtermoestagio, cur.nomecurso, te.datarescisaotermoestagio, te.estado " + 
 						"from termoestagio te " + 
 						"inner join aluno a " + 
 						"on te.aluno_idaluno = a.idaluno " + 

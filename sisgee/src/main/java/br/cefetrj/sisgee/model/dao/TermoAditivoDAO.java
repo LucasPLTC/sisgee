@@ -24,7 +24,7 @@ public class TermoAditivoDAO {
 		EntityManager manager = factory.createEntityManager();
 			
 			Query query = manager
-				.createNativeQuery("select cur.nomecurso, te.idtermoestagio from termoaditivo ta \r\n" + 
+				.createNativeQuery("select cur.nomecurso, te.idtermoestagio, te.estado from termoaditivo ta \r\n" + 
 						"inner join termoestagio te \r\n" + 
 						"on ta.termoestagio_idtermoestagio = te.idtermoestagio  \r\n" + 
 						"inner join aluno a \r\n" + 
@@ -58,7 +58,7 @@ public class TermoAditivoDAO {
 		EntityManager manager = factory.createEntityManager();
 			
 			Query query = manager
-				.createNativeQuery("select cur.nomecurso, te.idtermoestagio from termoaditivo ta \r\n" + 
+				.createNativeQuery("select cur.nomecurso, te.idtermoestagio, te.estado from termoaditivo ta \r\n" + 
 						"inner join termoestagio te \r\n" + 
 						"on ta.termoestagio_idtermoestagio = te.idtermoestagio  \r\n" + 
 						"inner join aluno a \r\n" + 

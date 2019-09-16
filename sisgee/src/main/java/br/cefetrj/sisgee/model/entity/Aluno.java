@@ -73,10 +73,14 @@ public class Aluno {
 	public Curso getCurso() {
 		return curso;
 	}
+        
+        
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+        
+        
 
 	public List<TermoEstagio> getTermoEstagios() {
 		return termoEstagios;
@@ -123,5 +127,24 @@ public class Aluno {
 	public String toString() {
 		return matricula;
 	}
+        
+        
+        public Aluno atualizaAlunoSIE(Aluno a,String nomeAlu, String nomeCur, String codCur, String nomeCampus){
+            Aluno NA = a;
+            Pessoa PN = a.getPessoa();
+            Curso CN= a.getCurso();
+            
+            
+            PN = PN.pessoaApiSIE(PN, nomeAlu);
+            CN = CN.cursoApiSIE(CN, nomeCur, codCur, nomeCampus);
+            
+            
+            NA.setCurso(CN);
+            NA.setPessoa(PN);
+            
+            
+            return NA;
+        
+        }
 
 }

@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.cefetrj.sisgee.control.AlunoServices;
+import static br.cefetrj.sisgee.control.AlunoServices.atualizaAlunoJson;
 import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.Campus;
 import br.cefetrj.sisgee.model.entity.Curso;
 import br.cefetrj.sisgee.model.entity.Pessoa;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
+import static br.cefetrj.sisgee.model.entity.TermoEstagio.ArrumaEstadoListaTermo;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.math.BigDecimal;
@@ -67,7 +69,8 @@ public class BuscaAlunoServlet extends HttpServlet {
                 
                 if(alunoMsg1.isEmpty() || alunoMsg1 == null ){
 
-                    Aluno aluno = AlunoServices.buscarAlunoByMatricula(matricula.trim());
+                    Aluno aluno = atualizaAlunoJson(matricula.trim());
+                    
                     if(aluno != null) {
                             Pessoa pessoa = aluno.getPessoa();
                             Curso curso   = aluno.getCurso();
@@ -79,11 +82,11 @@ public class BuscaAlunoServlet extends HttpServlet {
                             nomeCurso = curso.getNomeCurso();
                             nomeCampus = campus.getNomeCampus();
                             List<TermoEstagio> termos = aluno.getTermoEstagios();
-
+                            
+                            termos = ArrumaEstadoListaTermo(termos);
+                            for(TermoEstagio ter: termos){
                             if(termos != null && !termos.isEmpty()){
-                                if(((termoAditivo == null || termoAditivo.isEmpty()) && (aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataRescisaoTermoEstagio() == null &&   aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime())>0)) || ((termoAditivo == null || termoAditivo.isEmpty()) && 
-                                   ( aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataRescisaoTermoEstagio() != null && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataRescisaoTermoEstagio().compareTo(cal.getTime()) > 0) 
-                                        ) ){
+                                if(((termoAditivo == null || termoAditivo.isEmpty()) && (ter.getEstado()).equals("ativo"))){
                                     alunoMsg4 = "br.cefetrj.sisgee.form_termo_estagio_servlet.msg_aluno_has_termo_aberto";
                                     alunoMsg5 = "br.cefetrj.sisgee.resources.form.msg_aluno_has_termo_aberto2";
 
@@ -92,7 +95,7 @@ public class BuscaAlunoServlet extends HttpServlet {
                                     request.setAttribute("alunoMsg4", alunoMsg4);
                                     request.setAttribute("alunoMsg5", alunoMsg5);                                    
                                 }
-                                
+                            }
                                 for (TermoEstagio termo : termos) {
                                     if(termo.getDataFimTermoEstagio()== null){
                                         idTermoEstagioAtivo = 
@@ -150,5 +153,7 @@ public class BuscaAlunoServlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.getWriter().print(jsonData);
 	}
-
-}
+        
+        
+        
+       }

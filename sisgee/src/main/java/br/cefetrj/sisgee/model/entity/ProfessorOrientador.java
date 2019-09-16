@@ -1,5 +1,6 @@
 package br.cefetrj.sisgee.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class ProfessorOrientador {
+public class ProfessorOrientador implements Comparable<ProfessorOrientador>, Serializable {
 
 	@Id
 	@GeneratedValue
@@ -80,4 +81,12 @@ public class ProfessorOrientador {
 	public String toString() {
 		return nomeProfessorOrientador;
 	}
+        
+       
+
+    @Override
+    public int compareTo(ProfessorOrientador o) {
+                
+       return this.nomeProfessorOrientador.compareTo(o.nomeProfessorOrientador); 
+    }
 }

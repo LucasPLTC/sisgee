@@ -149,4 +149,13 @@ public class Pessoa implements Serializable {
     public String toString() {
         return nome;
     }
+    
+    public Pessoa pessoaApiSIE(Pessoa p, String nome){
+        Pessoa PN = p;
+       if(!(p.getNome()).equalsIgnoreCase(nome)){
+           PN.setNome(nome);
+       }
+       return PN;       
+    }
+    
 }

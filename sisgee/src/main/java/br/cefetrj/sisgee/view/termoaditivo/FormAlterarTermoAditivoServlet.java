@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jdk.nashorn.internal.runtime.ParserException;
+import static br.cefetrj.sisgee.model.entity.TermoEstagio.ArrumaEstadoTermo;
 
 /**
  * Servlet que recupera as informações do termo aditivo e as retorna para o formulário de alteração de termo aditivo
@@ -560,6 +561,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
 
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -577,6 +579,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                     termoAditivo2.setDataCadastramentoTermoAditivo((cal.getTime()));
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -595,6 +598,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                     termoAditivo3.setDataCadastramentoTermoAditivo((cal.getTime()));
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -613,6 +617,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                     termoAditivo4.setDataCadastramentoTermoAditivo((cal.getTime()));
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -635,6 +640,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                     termoAditivo5.setDataCadastramentoTermoAditivo((cal.getTime()));
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -656,6 +662,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                     termoAditivo6.setDataCadastramentoTermoAditivo((cal.getTime()));
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }

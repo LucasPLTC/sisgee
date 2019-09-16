@@ -21,6 +21,7 @@ import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.ProfessorOrientador;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
+import static br.cefetrj.sisgee.model.entity.TermoEstagio.ArrumaEstadoTermo;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
@@ -929,6 +930,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
 
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -946,6 +948,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                     termoAditivo2.setDataFimTermoAditivo(dataFim);
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -963,6 +966,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                     termoAditivo3.setDataFimTermoAditivo(dataFim);
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -979,6 +983,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                     termoAditivo4.setDataFimTermoAditivo(dataFim);
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -1001,6 +1006,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                     termoAditivo5.setDataFimTermoAditivo(dataFim);
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
@@ -1024,6 +1030,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                     System.out.println(dataFim);
                     int counter = 0;
                     for (TermoEstagio term : aluno.getTermoEstagios()) {
+                        term = ArrumaEstadoTermo(term);
                         if (term.getEstado().equals("Encerrado")) {
                             counter++;
                         }
